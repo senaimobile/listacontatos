@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 // imports Local API
 import com.br.listadecontatos.R;
+import com.br.listadecontatos.view.adapter.ListaContatosAdapter;
 
 /**
  * Classe de Tela Principal
@@ -18,6 +19,7 @@ import com.br.listadecontatos.R;
  */
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
+    private ListaContatosAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,12 @@ public class MainActivity extends AppCompatActivity {
         // carrega o layout padrão
         setContentView(R.layout.activity_main);
 
+        // instancia o adapter
+        adapter = new ListaContatosAdapter(getBaseContext());
+
         // pega o ListView
         listView = (ListView) findViewById(R.id.listaContato);
+        listView.setAdapter(adapter);
     }
 
     /**
@@ -37,7 +43,17 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onContatosClick(View view) {
         Intent it = new Intent(getBaseContext(), ContatoActivity.class);
-        it.putExtra("idContato", 1);
-        startActivity(it);
+        it.putExtra("idContato", 0);
+        startActivityForResult(it, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+            adapter.notifyDataSetChanged();
+        }
+
     }
 }

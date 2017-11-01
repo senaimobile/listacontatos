@@ -1,6 +1,7 @@
 package com.br.listadecontatos.view;
 
 // imports ANDROID API
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -82,8 +83,13 @@ public class ContatoActivity extends AppCompatActivity {
 
             // mostra a mernsagem de sucesso
             UtilsHelper.msg(getBaseContext(), "Contato gravado com sucesso!");
+
+            setResult(Activity.RESULT_OK);
         }
-        catch (ExceptionDAO e) { UtilsHelper.msg(getBaseContext(), e.getMessage()); }
+        catch (ExceptionDAO e) {
+            UtilsHelper.msg(getBaseContext(), e.getMessage());
+            setResult(Activity.RESULT_CANCELED);
+        }
 
         // finaliza
         finish();

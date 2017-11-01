@@ -66,4 +66,9 @@ public class ListaContatosAdapter extends BaseAdapter {
 
         return convertView;
     }
+    
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }
