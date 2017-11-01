@@ -3,7 +3,7 @@ package com.br.listadecontatos.model.bean;
 /**
  * Classe Bean de Contato
  *
- * @author  Claudio Monteoliva
+ * @author Professor Claudio Monteoliva
  * @since 1.0 on 31/10/2017.
  */
 public class Contatos {
