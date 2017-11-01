@@ -1,6 +1,7 @@
 package com.br.listadecontatos.view;
 
 // imports ANDROID API
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.br.listadecontatos.R;
 import com.br.listadecontatos.model.bean.Contatos;
 import com.br.listadecontatos.model.dao.ContatosDAO;
 import com.br.listadecontatos.model.dao.ExceptionDAO;
+import com.br.listadecontatos.utils.UtilsHelper;
 
 /**
  * Classe de Tela de Contato (Inclusão/Edição)
@@ -21,7 +23,6 @@ import com.br.listadecontatos.model.dao.ExceptionDAO;
  */
 public class ContatoActivity extends AppCompatActivity {
     private EditText txtNome, txtEmail, txtTelefone;
-    private Contatos oldContatos;
     private int idContato = 0;
 
     @Override
@@ -39,16 +40,21 @@ public class ContatoActivity extends AppCompatActivity {
         txtEmail    = (EditText) findViewById(R.id.txtEmail);
         txtTelefone = (EditText) findViewById(R.id.txtTelefone);
 
-        try {
-            // pega o contato selecionado na Lista de Contatos
-            oldContatos = ContatosDAO.manager.get(idContato);
+        if (idContato > 0) {
+            try {
+                // pega o contato selecionado na Lista de Contatos
+                Contatos oldContatos = ContatosDAO.manager.get(idContato);
 
-            // seta os dados do contato nos campos
-            txtNome.setText(oldContatos.getNome());
-            txtEmail.setText(oldContatos.getEmail());
-            txtTelefone.setText(oldContatos.getTelefone());
+                // seta os dados do contato nos campos
+                txtNome.setText(oldContatos.getNome());
+                txtEmail.setText(oldContatos.getEmail());
+                txtTelefone.setText(oldContatos.getTelefone());
+            }
+            catch (ExceptionDAO e) {
+                UtilsHelper.msg(getBaseContext(), e.getMessage());
+                idContato = 0;
+            }
         }
-        catch (ExceptionDAO e) { msg(e.getMessage()); }
     }
 
     /**
@@ -73,22 +79,13 @@ public class ContatoActivity extends AppCompatActivity {
             // verifica
             if (idContato == 0) { ContatosDAO.manager.add(contatos); }
             else                { ContatosDAO.manager.put(contatos); }
-        }
-        catch (ExceptionDAO e) { msg(e.getMessage()); }
 
-        // mostra a mernsagem de sucesso
-        msg("Contato gravado com sucesso!");
+            // mostra a mernsagem de sucesso
+            UtilsHelper.msg(getBaseContext(), "Contato gravado com sucesso!");
+        }
+        catch (ExceptionDAO e) { UtilsHelper.msg(getBaseContext(), e.getMessage()); }
 
         // finaliza
         finish();
-    }
-
-    /**
-     * Metodo que mostra erro na tela
-     *
-     * @param msg
-     */
-    private void msg(String msg) {
-        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
     }
 }
