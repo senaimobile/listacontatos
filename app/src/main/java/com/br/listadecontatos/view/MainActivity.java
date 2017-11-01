@@ -54,6 +54,5 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK) {
             adapter.notifyDataSetChanged();
         }
-
     }
 }
