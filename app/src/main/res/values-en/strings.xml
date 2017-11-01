@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contacts List</string>
+    <string name="txt_nome">Name</string>
+    <string name="txt_email">E-mail</string>
+    <string name="txt_telefone">Phone</string>
+    <string name="btn_gravar">Save</string>
+</resources>

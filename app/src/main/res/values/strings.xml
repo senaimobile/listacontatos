@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lista de Contatos</string>
+    <string name="txt_nome">Nome</string>
+    <string name="txt_email">E-mail</string>
+    <string name="txt_telefone">Telefone</string>
+    <string name="btn_gravar">Gravar</string>
+</resources>
