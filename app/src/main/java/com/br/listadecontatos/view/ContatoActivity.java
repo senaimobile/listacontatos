@@ -24,7 +24,7 @@ import com.br.listadecontatos.utils.UtilsHelper;
  */
 public class ContatoActivity extends AppCompatActivity {
     private EditText txtNome, txtEmail, txtTelefone;
-    private int idContato = 0;
+    private long idContato = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class ContatoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contato);
 
         // pega o ID passado
-        idContato = getIntent().getIntExtra("idContato", 0);
+        idContato = getIntent().getLongExtra("idContato", 0);
 
         // pega os campos da tela
         txtNome     = (EditText) findViewById(R.id.txtNome);

@@ -17,7 +17,7 @@ import com.br.listadecontatos.model.bean.Contatos;
 public class ContatosDAO {
     public static ContatosDAO manager = new ContatosDAO();
     private List<Contatos> lista;
-    private int id = 0;
+    private long id = 0;
 
     /**
      * Constructor
@@ -73,7 +73,7 @@ public class ContatosDAO {
      * @return
      * @throws ExceptionDAO
      */
-    public Contatos get(int id) throws ExceptionDAO {
+    public Contatos get(long id) throws ExceptionDAO {
         Contatos pesquisa = null;
         for(Contatos item : lista) {
             if (item.getId() == id) {

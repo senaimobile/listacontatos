@@ -7,17 +7,17 @@ package com.br.listadecontatos.model.bean;
  * @since 1.0 on 31/10/2017.
  */
 public class Contatos {
-    private int id;
+    private long id;
     private String nome;
     private String email;
     private String telefone;
     private boolean del;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
