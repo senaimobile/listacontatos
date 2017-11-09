@@ -4,12 +4,17 @@ package com.br.listadecontatos.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 // imports Local API
 import com.br.listadecontatos.R;
+import com.br.listadecontatos.model.dao.ContatosDAO;
+import com.br.listadecontatos.model.dao.ExceptionDAO;
 import com.br.listadecontatos.view.adapter.ListaContatosAdapter;
 
 /**
@@ -18,7 +23,7 @@ import com.br.listadecontatos.view.adapter.ListaContatosAdapter;
  * @author Professor Claudio Monteoliva
  * @since 1.0 on 31/10/2017
  */
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private ListView listView;
     private ListaContatosAdapter adapter;
 
@@ -36,14 +41,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listView = (ListView) findViewById(R.id.listaContato);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
     }
-
-    /**
-     * Metodo executado no botão Contatos
-     *
-     * @param view
-     */
-    public void onContatosClick(View view) { goContatos(0); }
 
     /**
      * Metodo que redireciona para a tela de Cadastro de Contato
@@ -69,5 +68,42 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // redireciona a tela de contatos passando o ID selecionado na lista
         goContatos(id);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.menu_item1:
+                goContatos(0);
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        try {
+            ContatosDAO.manager.del(id);
+
+            adapter.notifyDataSetChanged();
+
+            Toast.makeText(getBaseContext(), "ID " + id + " foi excluído com sucesso!", Toast.LENGTH_LONG).show();
+
+        }
+        catch (ExceptionDAO exceptionDAO) {}
+
+
+
+
+        return true;
     }
 }

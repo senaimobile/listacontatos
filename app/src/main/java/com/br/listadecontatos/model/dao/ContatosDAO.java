@@ -102,4 +102,15 @@ public class ContatosDAO {
                  pesquisa.setTelefone(obj.getTelefone());
                  pesquisa.setDel(obj.isDel());
     }
+
+    /**
+     * Metodo para remover um Contato
+     *
+     * @param id
+     * @throws ExceptionDAO
+     */
+    public void del(long id) throws ExceptionDAO {
+        Contatos pesquisa = get(id);
+        lista.remove(pesquisa);
+    }
 }
