@@ -3,6 +3,7 @@ package com.br.listadecontatos.view;
 // imports ANDROID API
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,13 @@ public class ContatoActivity extends AppCompatActivity {
 
         // carrega o Layout padrão
         setContentView(R.layout.activity_contato);
+
+        // pega a ActionBar
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
 
         // pega o ID passado
         idContato = getIntent().getLongExtra("idContato", 0);
