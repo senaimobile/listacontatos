@@ -7,4 +7,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="Cadastro"
         app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/menu_item2"
+        android:icon="@android:drawable/ic_menu_sort_alphabetically"
+        android:title="Ordernar"
+        app:showAsAction="always|withText" />
 </menu>

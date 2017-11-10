@@ -5,4 +5,8 @@
     <string name="txt_email">E-mail</string>
     <string name="txt_telefone">Teléfono</string>
     <string name="btn_gravar">Guardar</string>
+    <string name="d_titulo">Excluir Contato</string>
+    <string name="d_mensagem">Deseja realmente excluir esse contato?</string>
+    <string name="d_btnExcluir">EXCLUIR</string>
+    <string name="d_btnCancelar">CANCELAR</string>
 </resources>

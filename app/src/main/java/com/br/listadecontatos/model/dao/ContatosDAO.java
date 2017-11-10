@@ -1,7 +1,14 @@
 package com.br.listadecontatos.model.dao;
 
 // imports JAVA API
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // imports Local API
@@ -112,5 +119,11 @@ public class ContatosDAO {
     public void del(long id) throws ExceptionDAO {
         Contatos pesquisa = get(id);
         lista.remove(pesquisa);
+    }
+
+    public void sort() throws ExceptionDAO {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Collections.sort(lista, Comparator.comparing(Contatos::getNome));
+        }
     }
 }
