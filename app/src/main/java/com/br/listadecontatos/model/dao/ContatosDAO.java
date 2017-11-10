@@ -1,12 +1,10 @@
 package com.br.listadecontatos.model.dao;
 
-// imports JAVA API
-import android.annotation.TargetApi;
+// imports ANDROID API
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
+// imports JAVA API
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -121,9 +119,22 @@ public class ContatosDAO {
         lista.remove(pesquisa);
     }
 
+    /**
+     * Metodo que ordena a lista
+     *
+     * @throws ExceptionDAO
+     */
     public void sort() throws ExceptionDAO {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Collections.sort(lista, Comparator.comparing(Contatos::getNome));
+            Collections.sort(lista, new Comparator<Contatos>() {
+                        @Override
+                        public int compare(Contatos o1, Contatos o2) {
+                            return o1.getNome().compareToIgnoreCase(o2.getNome());
+                        }
+                    });
+        }
+        else {
+            throw new ExceptionDAO("Erro ao ordernar a lista!");
         }
     }
 }
