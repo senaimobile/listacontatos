@@ -6,6 +6,8 @@ import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,15 +36,21 @@ public class ContatoActivity extends AppCompatActivity {
         // carrega o Layout padrão
         setContentView(R.layout.activity_contato);
 
+        // pega o ID passado
+        idContato = getIntent().getLongExtra("idContato", 0);
+
         // pega a ActionBar
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            // pega o titulo
+            String title = (idContato == 0) ? "Incluir" : "Editar";
+
+            // seta informacoes no ActionBar
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("Cadastro de Contato");
+            actionBar.setSubtitle(title);
         }
-
-        // pega o ID passado
-        idContato = getIntent().getLongExtra("idContato", 0);
 
         // pega os campos da tela
         txtNome     = (EditText) findViewById(R.id.txtNome);
@@ -68,10 +76,8 @@ public class ContatoActivity extends AppCompatActivity {
 
     /**
      * Metodo executado no botão Gravar
-     *
-     * @param view
      */
-    public void onSaveClick(View view) {
+    public void onSaveClick() {
         // pega os dados digitados
         String nome     = txtNome.getEditableText().toString();
         String email    = txtEmail.getEditableText().toString();
@@ -101,5 +107,28 @@ public class ContatoActivity extends AppCompatActivity {
 
         // finaliza
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.contato_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                setResult(Activity.RESULT_CANCELED);
+                finish();
+                break;
+            case R.id.action_save:
+                onSaveClick();
+                break;
+        }
+
+        return true;
     }
 }

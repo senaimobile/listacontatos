@@ -4,6 +4,7 @@ package com.br.listadecontatos.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // carrega o layout padrão
         setContentView(R.layout.activity_main);
+
+        // pega a ActionBar
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setSubtitle("Lista");
+        }
 
         // instancia o adapter
         adapter = new ListaContatosAdapter(getBaseContext());
